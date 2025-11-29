@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Calculator</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #2b1055, #7597de);
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            width: 330px;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #000000cc;
+            color: white;
+            font-size: 28px;
+            text-align: right;
+            padding: 15px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            height: 60px;
+            border: none;
+            border-radius: 12px;
+            font-size: 20px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.07);
+        }
+
+        .operator {
+            background: #ff9f0c;
+            color: black;
+            font-weight: bold;
+        }
+
+        .operator:hover {
+            background: #ffb64d;
+        }
+
+        .equal {
+            background: #00e676;
+            color: black;
+            font-weight: bold;
+        }
+
+        .equal:hover {
+            background: #66ffb3;
+        }
+
+        .clear {
+            background: #ff3b3b;
+            color: white;
+        }
+
+        .clear:hover {
+            background: #ff6666;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+
+        <div class="buttons">
+            <button class="clear">C</button>
+            <button class="del">DEL</button>
+            <button class="operator">/</button>
+            <button class="operator">*</button>
+
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator">-</button>
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="operator">+</button>
+
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="equal">=</button>
+
+            <button style="grid-column: span 2;">0</button>
+            <button>.</button>
+        </div>
+    </div>
+
+
+<script>
+
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll("button");
+
+    // Loop to add event listeners
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const value = btn.innerText;
+
+            if (value === "C") {
+                display.value = "";
+            }
+
+            else if (value === "DEL") {
+                display.value = display.value.slice(0, -1);
+            }
+
+            else if (value === "=") {
+                if (display.value === "") return;
+                try {
+                    // Using if-else for calculation
+                    display.value = eval(display.value);
+                } catch {
+                    display.value = "Error";
+                }
+            }
+
+            else {
+                display.value += value;
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
